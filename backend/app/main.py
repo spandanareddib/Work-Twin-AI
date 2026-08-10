@@ -3,7 +3,8 @@ from pathlib import Path
 from fastapi import FastAPI, UploadFile, File, HTTPException
 
 from app.services.resume_parser.pdf_extractor import extract_text_from_pdf
-
+from app.services.resume_parser.skill_extractor import extract_skills
+from app.services.resume_parser.profile_parser import build_profile
 
 app = FastAPI(
     title="WorkTwin AI",
@@ -63,8 +64,11 @@ async def upload_resume(file: UploadFile = File(...)):
     # Extract text from the PDF
     extracted_text = extract_text_from_pdf(str(file_path))
 
+    profile = build_profile(extracted_text)
+
     return {
-        "filename": file.filename,
-        "message": "Resume uploaded successfully",
-        "text": extracted_text
+    "filename": file.filename,
+    "message": "Resume analyzed successfully",
+    "profile": profile,
+    "text": extracted_text
     }
