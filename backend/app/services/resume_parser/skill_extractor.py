@@ -21,6 +21,11 @@ TECHNICAL_SKILLS = {
     "fastapi",
     "django",
 
+    "data cleaning",
+    "data visualization",
+    "power query",
+    "matplotlib",
+    
     "sql",
     "mysql",
     "postgresql",
